@@ -1,0 +1,7 @@
+view functions documentation
+=============================
+
+1. add_copun
+
+    add a new copun to a factor if the copun is outdated will raise error
+
