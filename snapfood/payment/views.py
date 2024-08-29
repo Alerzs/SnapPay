@@ -1,6 +1,8 @@
 from django.http.response import HttpResponse , JsonResponse
 from payment.models import Factor ,Copun ,Transaction ,Usr
 from random import randint
+from rest_framework.generics import ListAPIView, RetrieveAPIView
+from .serialize import CopunSerializer
 
 
 def my_copun(request , email):
@@ -39,5 +41,9 @@ def add_copun(request , transID , email , code):
         my_trans.copun = copun
         return HttpResponse("copun added successfuly")
     return HttpResponse("email is wronge")
+
+class MyNewCopun(ListAPIView):
+    queryset = Copun.objects.all()
+    serializer_class = CopunSerializer
 
     
