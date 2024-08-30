@@ -1,7 +1,7 @@
 from django.http.response import HttpResponse , JsonResponse
 from payment.models import Factor ,Copun ,Transaction ,Usr
 from random import randint
-from rest_framework.generics import ListAPIView, RetrieveAPIView , CreateAPIView
+from rest_framework.generics import ListAPIView, RetrieveAPIView , CreateAPIView,ListCreateAPIView, RetrieveUpdateDestroyAPIView
 from .serialize import CopunSerializer , Transcreate
 
 
@@ -51,5 +51,12 @@ class CreatTransaction(CreateAPIView):
     serializer_class = Transcreate
     
 class CreateCupon(CreateAPIView):
+    queryset = Copun.objects.all()
+    serializer_class = CopunSerializer
+class CuponDetail(ListCreateAPIView):
+    queryset = Copun.objects.all()
+    serializer_class = CopunSerializer
+
+class CuponModifier(RetrieveUpdateDestroyAPIView):
     queryset = Copun.objects.all()
     serializer_class = CopunSerializer
