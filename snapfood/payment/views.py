@@ -50,3 +50,6 @@ class CreatTransaction(CreateAPIView):
     queryset = Transaction.objects.all()
     serializer_class = Transcreate
     
+class CreateCupon(CreateAPIView):
+    queryset = Copun.objects.all()
+    serializer_class = CopunSerializer
