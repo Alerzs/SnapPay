@@ -5,3 +5,5 @@ class CopunSerializer(ModelSerializer):
     class Meta:
         model = Copun
         fields = "__all__"
+
+        
