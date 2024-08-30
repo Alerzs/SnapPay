@@ -1,8 +1,8 @@
 from django.http.response import HttpResponse , JsonResponse
 from payment.models import Factor ,Copun ,Transaction ,Usr
 from random import randint
-from rest_framework.generics import ListAPIView, RetrieveAPIView
-from .serialize import CopunSerializer
+from rest_framework.generics import ListAPIView, RetrieveAPIView , CreateAPIView
+from .serialize import CopunSerializer , Transcreate
 
 
 def my_copun(request , email):
@@ -46,4 +46,7 @@ class MyNewCopun(ListAPIView):
     queryset = Copun.objects.all()
     serializer_class = CopunSerializer
 
+class CreatTransaction(CreateAPIView):
+    queryset = Transaction.objects.all()
+    serializer_class = Transcreate
     
