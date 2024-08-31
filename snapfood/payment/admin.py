@@ -27,10 +27,3 @@ class TransactionAdmin(ModelAdmin):
         'trans_id',
         'factor'
     ]
-
-
-@register(Usr)
-class UserAdmin(ModelAdmin):
-    list_display = [
-        'email',
-    ]
