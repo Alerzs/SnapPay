@@ -1,5 +1,5 @@
 from django.http.response import HttpResponse , JsonResponse
-from payment.models import Factor ,Copun ,Transaction ,Usr
+from payment.models import Factor ,Copun ,Transaction 
 from random import randint
 from rest_framework.generics import ListAPIView, RetrieveAPIView , CreateAPIView,ListCreateAPIView, RetrieveUpdateDestroyAPIView
 from .serialize import CopunSerializer , Transcreate , Factorserialize
