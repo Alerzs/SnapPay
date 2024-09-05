@@ -3,7 +3,7 @@ from payment.models import Factor ,Copun ,Transaction
 from random import randint
 from rest_framework.generics import ListAPIView, RetrieveAPIView , CreateAPIView,ListCreateAPIView, RetrieveUpdateDestroyAPIView
 from .serialize import CopunSerializer , Transcreate , Factorserialize
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated , IsAdminUser ,AllowAny
 from rest_framework_simplejwt.views import TokenObtainPairView , token_refresh
 
 
@@ -53,59 +53,51 @@ class refresh(token_refresh):
     pass
 
 
-class TransDetail(ListAPIView):
+class TransDetail(ListCreateAPIView):
     queryset = Transaction.objects.all()
     serializer_class = Transcreate
-    permission_classes = [IsAuthenticated]
-    def get_queryset(self):
-        return Transaction.objects.filter(user=self.request.user)
+    def get_permissions(self):
+        if self.action == 'POST':
+            self.permission_classes = [IsAdminUser]
+        elif self.action == 'GET':
+            self.permission_classes =[AllowAny]
+        return super().get_permissions()
 
-class TransModifier(RetrieveUpdateDestroyAPIView):
-    queryset = Transaction.objects.all()
-    serializer_class = Transcreate
-    permission_classes = [IsAuthenticated]
-    def get_queryset(self):
-        return Transaction.objects.filter(user=self.request.user)
     
-class CreatFactor(CreateAPIView):
-    queryset = Factor.objects.all()
-    serializer_class = Factorserialize   
  
-class FactorDetail(ListAPIView):
+class FactorDetail(ListCreateAPIView):
     queryset = Factor.objects.all()
     serializer_class = Factorserialize
     permission_classes = [IsAuthenticated]
-    def get_queryset(self):
-        return Factor.objects.filter(user=self.request.user)
+    def get_permissions(self):
+        if self.action == 'POST':
+            self.permission_classes = [IsAdminUser]
+        elif self.action == 'GET':
+            self.permission_classes =[AllowAny]
+        return super().get_permissions()
 
 class FactorModifier(RetrieveUpdateDestroyAPIView):
     queryset = Factor.objects.all()
     serializer_class = Factorserialize
-    permission_classes = [IsAuthenticated]
-    def get_queryset(self):
-        return Factor.objects.filter(user=self.request.user)
+    permission_classes = [IsAdminUser]
 
-class CreatTransaction(CreateAPIView):
-    queryset = Transaction.objects.all()
-    serializer_class = Transcreate
+
 
     
     
-class CreatCopun(CreateAPIView):
-    queryset = Copun.objects.all()
-    serializer_class = CopunSerializer
     
-class CuponDetail(ListAPIView):
+class CuponDetail(ListCreateAPIView):
     queryset = Copun.objects.all()
     serializer_class = CopunSerializer
-    permission_classes = [IsAuthenticated]
-    def get_queryset(self):
-        return Copun.objects.filter(user=self.request.user)
+    def get_permissions(self):
+        if self.action == 'POST':
+            self.permission_classes = [IsAdminUser]
+        elif self.action == 'GET':
+            self.permission_classes =[AllowAny]
+        return super().get_permissions()
 
 class CuponModifier(RetrieveUpdateDestroyAPIView):
     queryset = Copun.objects.all()
     serializer_class = CopunSerializer
-    permission_classes = [IsAuthenticated]
-    def get_queryset(self):
-        return Copun.objects.filter(user=self.request.user)
+    permission_classes = [IsAdminUser]
     
