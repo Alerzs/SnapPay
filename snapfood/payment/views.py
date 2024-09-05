@@ -82,9 +82,6 @@ class FactorModifier(RetrieveUpdateDestroyAPIView):
     permission_classes = [IsAdminUser]
 
 
-
-    
-    
     
 class CuponDetail(ListCreateAPIView):
     queryset = Copun.objects.all()
