@@ -5,6 +5,8 @@ from rest_framework.generics import ListAPIView, RetrieveAPIView , CreateAPIView
 from .serialize import CopunSerializer , Transcreate , Factorserialize
 from rest_framework.permissions import IsAuthenticated , IsAdminUser ,AllowAny
 from rest_framework_simplejwt.views import TokenObtainPairView , token_refresh
+from rest_framework import filters
+from django_filters.rest_framework import DjangoFilterBackend
 
 
 
@@ -92,6 +94,8 @@ class CuponDetail(ListCreateAPIView):
         elif self.action == 'GET':
             self.permission_classes =[AllowAny]
         return super().get_permissions()
+    filter_backends = [DjangoFilterBackend, filters.OrderingFilter, filters.SearchFilter]
+    ordering_fields = ["percent"]
 
 class CuponModifier(RetrieveUpdateDestroyAPIView):
     queryset = Copun.objects.all()
