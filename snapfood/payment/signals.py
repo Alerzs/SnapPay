@@ -3,4 +3,4 @@ from django.contrib.auth.models import User
 from django.dispatch import receiver
 
 
-@receiver(post_save,sender =  )
+@receiver(post_save,sender = Order)

@@ -1,11 +1,12 @@
 from django.urls import path
-from payment.views import my_copun , start_trans , add_copun, CuponDetail, CuponModifier
+from payment.views import CopunView , CopunEditor , AddCopunToFactor , Login ,StartTransaction , MyFactors , MyTrans 
 
 urlpatterns = [
-    path("my_copun/<str:email>" ,my_copun),
-    path("trans/<str:dargah>/<str:fac_id>" , start_trans),
-    path("add_copun/<str:transID>/<str:email>/<str:code>" , add_copun),
-    path("detail-cupun", CuponDetail.as_view()),
-    path("modify_cupom/<int:pk>", CuponModifier.as_view())
-
+    path("login/" ,Login.as_view()),
+    path("copun/" ,CopunView.as_view()),
+    path("edcopun/<int:pk>" , CopunEditor.as_view()),
+    path("add_copun/<int:pk>" ,AddCopunToFactor.as_view()),
+    path("trans/" ,StartTransaction.as_view()),
+    path("my_factors/" ,MyFactors.as_view()),
+    path("my_trans/" ,MyTrans.as_view()),
 ]

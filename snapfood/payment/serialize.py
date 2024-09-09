@@ -7,10 +7,10 @@ class CopunSerializer(ModelSerializer):
         fields = "__all__"
         
         
-class Transcreate(ModelSerializer):
+class TransactionSerializer(ModelSerializer):
     class Meta:
         model = Transaction
-        fields = "__all__"
+        fields = '__all__'
 
 class Factorserialize(ModelSerializer):
     class Meta:
