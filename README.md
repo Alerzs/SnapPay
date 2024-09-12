@@ -6,6 +6,7 @@ Key Features
 .Invoice (Factor) Management: Track and manage invoices.
 .Transaction Handling: Securely process payments and record transaction history.
 Installation
+
 1.Clone the repository:
 git clone https://github.com/Alerzs/SnapPay
 cd snapfood/payment
