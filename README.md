@@ -9,12 +9,16 @@ Installation
 1.Clone the repository:
 git clone https://github.com/Alerzs/SnapPay
 cd snapfood/payment
+
 2.Install dependencies:
 pip install -r requirements.txt
+
 3.Apply migrations:
 python manage.py migrate
+
 4.Run the development server:
 python manage.py runserver
+
 API Endpoints
 /login/: JWT login.
 /copun/: View and create coupons.
