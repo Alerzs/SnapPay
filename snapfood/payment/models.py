@@ -33,4 +33,4 @@ class Factor(models.Model):
 class Transaction(models.Model):
     dargah = models.CharField(max_length=20)
     trans_id = models.CharField(max_length=10 ,null=True , blank=True)
-    factor = models.ForeignKey(Factor ,on_delete=models.PROTECT , related_name= "factor")
+    factor = models.ForeignKey(Factor ,on_delete=models.PROTECT , related_name= "factor").
