@@ -8,6 +8,8 @@ from .serialize import CopunSerializer , TransactionSerializer , Factorserialize
 from rest_framework.permissions import IsAuthenticated , IsAdminUser ,AllowAny
 from rest_framework_simplejwt.views import TokenObtainPairView , TokenRefreshView
 from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.views import APIView
+from rest_framework.response import Response
 from rest_framework import filters
 import json
 
@@ -117,6 +119,7 @@ class StartTransaction(CreateAPIView):
             raise ValidationError("this factor has already been paid")
         my_factor.status = True
         my_factor.save()
+        #-------------------------call arshia
         return serializer.save(trans_id = randint(10000,99999))
 
 
@@ -133,28 +136,34 @@ class MyTrans(ListAPIView):
 
 
 
-def get_orders(request):
+class GetOrder(APIView):
     """
     send an api to get order and user object from arshia and makes factor and user objects
     """
-    url = ""
-    api_key = ""
-    response = requests.get(url , headers={"Api-Key": api_key})
-    User.objects.create()
-    Factor.objects.create()
+    def post(self,request):
+        api_key = "aaa"
+        key = request.headers.get("key")
+        user = request.data.get("username")
+        order_id = request.data.get("order_id")
+        price = request.data.get("price")
+        delivery_price = request.data.get("delivery_price")
+        pro = request.data.get("pro")
+        if api_key != key:
+            return Response()     
+        if pro:
+            discount_price = price * 0.2   
+        else:
+            price += delivery_price
+            discount_price = price
+        my_user = User.objects.create(username = user)
+        my_factor = Factor.objects.create(order_id = order_id , status = False , price = price , discount_price = discount_price ,user = my_user)
+        return Response({
+            "date":my_factor.date,
+            "status":my_factor.status,
+            "price":my_factor.price,
+            "discount_price":my_factor.discount_price,
+            "user":my_user.username,
+            })
 
 
 
-def check_pro(request):
-    """
-    send an api to check if user is pro or not
-    """
-    my_user = ""
-    url = ""
-    api_key = ""
-    response = requests.get(url , headers={"Api-Key": api_key})
-    if json.loads(response)["stat"]:
-        my_factor = Factor.objects.get(user = my_user)
-        my_factor.price *= 0.15
-        my_factor.save()
-    

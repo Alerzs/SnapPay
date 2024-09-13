@@ -19,7 +19,7 @@ class Copun(models.Model):
         return self.code
 
 class Factor(models.Model):
-    date = models.DateField()
+    date = models.DateField(auto_now_add=True)
     order_id = models.IntegerField(unique=True)
     status = models.BooleanField()
     price = models.FloatField()

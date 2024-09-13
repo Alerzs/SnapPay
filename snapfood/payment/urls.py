@@ -1,5 +1,5 @@
 from django.urls import path
-from payment.views import CopunView , CopunEditor , AddCopunToFactor , Login ,StartTransaction , MyFactors , MyTrans 
+from payment.views import CopunView , CopunEditor , AddCopunToFactor , Login ,StartTransaction , MyFactors , MyTrans ,GetOrder
 
 urlpatterns = [
     path("login/" ,Login.as_view()),
@@ -9,4 +9,5 @@ urlpatterns = [
     path("trans/" ,StartTransaction.as_view()),
     path("my_factors/" ,MyFactors.as_view()),
     path("my_trans/" ,MyTrans.as_view()),
+    path("getorder/",GetOrder.as_view())
 ]

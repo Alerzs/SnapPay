@@ -138,3 +138,10 @@ SIMPLE_JWT={
     "ACCESS_TOKEN_LIFETIME": timedelta(hours=5),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
 }
+
+CELERY_BEAT_SCHEDULE = {
+    'task_name': {
+        'task': '<app_name>.tasks.task_name',
+        'schedule': timedelta(minutes=5),
+    },
+}
