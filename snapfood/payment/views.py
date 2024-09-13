@@ -176,6 +176,7 @@ class GetFactor(APIView):
         order_id = request.data.get("order_id")
         price = request.data.get("price")
         pro = request.data.get("pro")
+        delivery_price = request.data.get("delivery_price")
         if api_key != key:
             return Response()
         if pro:
