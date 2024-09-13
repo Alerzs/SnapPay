@@ -78,17 +78,19 @@ WSGI_APPLICATION = 'snapfood.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': "snap_pay",
-#         'USER': "postgres",
-#         'PASSWORD': "1234",
-#         'HOST':"Localhost",
-#         'PORT': "5432",
-#     }
-    
-# }
+from decouple import config
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': config('DB_NAME'),
+        'USER': config('DB_USER'),
+        'PASSWORD': config('DB_PASSWORD'),
+        'HOST': config('DB_HOST'),
+        'PORT': config('DB_PORT'),
+    }
+}
+
 
 DATABASES = {
     'default': {
@@ -139,9 +141,14 @@ SIMPLE_JWT={
     "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
 }
 
+<<<<<<< HEAD
 CELERY_BEAT_SCHEDULE = {
     'task_name': {
         'task': '<app_name>.tasks.task_name',
         'schedule': timedelta(minutes=5),
     },
 }
+=======
+from decouple import config
+
+>>>>>>> 90a60bd16615655955ab683c2d8356c767731ddf
