@@ -149,7 +149,7 @@ class GetOrder(APIView):
         delivery_price = request.data.get("delivery_price")
         pro = request.data.get("pro")
         if api_key != key:
-            return Response("you are no allowed")     
+            return Response("you are not allowed")     
         if pro:
             discount_price = price * 0.2   
         else:
@@ -169,15 +169,22 @@ class GetOrder(APIView):
 class GetFactor(APIView):
 
     def post(self,request):
+        api_key = "mqod"
+        key = request.headers.get("key")
+        if key != api_key:
+            return Response("invalid api key")
         try:
             user = request.data.get("restaurant_name")
+            price = request.data.get("price")
+            url = "45.139.10.8:8003/update-pro-restaurant"
         except:
             user = request.data.get("phone_number")
-        price = request.data.get("price")
+            price = request.data.get("price")
+            url = "45.139.10.8:8003/update-pro-user"
 
-        url = ""
+    
         send = json.dumps({"name":user,"is_paid":True})
         requests.post(url , send)
 
-        #---------------api mahan user and true
+
 
