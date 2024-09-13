@@ -165,7 +165,36 @@ class GetOrder(APIView):
             "user":my_user.username,
             })
 
+<<<<<<< HEAD
 
 
 
 
+=======
+class GetFactor(APIView):
+    """
+    send an api to get factor and user object from arshia and makes factor and user objects
+    """
+    def post(self,request):
+        api_key = "aaa"
+        key = request.headers.get("key")
+        user = request.data.get("username")
+        order_id = request.data.get("order_id")
+        price = request.data.get("price")
+        pro = request.data.get("pro")
+        delivery_price = request.data.get("delivery_price")
+        if api_key != key:
+            return Response()
+        if pro:
+            discount_price = price * 0.2
+        else:
+            price += delivery_price
+            discount_price = price
+        my_user = User.objects.create(username = user)
+        my_factor = Factor.objects.create(order_id = order_id , status = False , price = price , discount_price = discount_price ,user = my_user)
+        return Response({
+            "date":my_factor.date,
+            "status":my_factor.status,
+            "price":my_factor.price,
+        })
+>>>>>>> 40f177b631cf3cf3577df1c3bd027f443986d03f
