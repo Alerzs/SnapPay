@@ -169,8 +169,15 @@ class GetOrder(APIView):
 class GetFactor(APIView):
 
     def post(self,request):
-        user = request.data.get("username")
+        try:
+            user = request.data.get("restaurant_name")
+        except:
+            user = request.data.get("phone_number")
         price = request.data.get("price")
+
+        url = ""
+        send = json.dumps({"name":user,"is_paid":True})
+        requests.post(url , send)
 
         #---------------api mahan user and true
 
