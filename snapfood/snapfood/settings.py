@@ -12,6 +12,9 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 from datetime import timedelta
+import environ
+env = environ.Env()
+environ.Env.read_env()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,12 +24,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-h!f+*q8$9n&kx*9@q#)0134&rt+3hvbuz*div!h6#fk44go9xz'
+SECRET_KEY = env("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = env("ALLOWED_HOSTS")
 
 
 # Application definition
@@ -78,16 +81,16 @@ WSGI_APPLICATION = 'snapfood.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-from decouple import config
+
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': config('DB_NAME'),
-        'USER': config('DB_USER'),
-        'PASSWORD': config('DB_PASSWORD'),
-        'HOST': config('DB_HOST'),
-        'PORT': config('DB_PORT'),
+        'NAME': env("NAME"),
+        'USER': env("DATABASE_USER"),
+        'PASSWORD': env("DATABASE_PASSWORD"),
+        'HOST': 'localhost',
+        'PORT': '5432'
     }
 }
 
@@ -141,14 +144,9 @@ SIMPLE_JWT={
     "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
 }
 
-<<<<<<< HEAD
 CELERY_BEAT_SCHEDULE = {
     'task_name': {
         'task': '<app_name>.tasks.task_name',
         'schedule': timedelta(minutes=5),
     },
 }
-=======
-from decouple import config
-
->>>>>>> 90a60bd16615655955ab683c2d8356c767731ddf

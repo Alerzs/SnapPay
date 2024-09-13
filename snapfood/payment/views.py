@@ -165,6 +165,12 @@ class GetOrder(APIView):
             "user":my_user.username,
             })
 
+<<<<<<< HEAD
+
+
+
+
+=======
 class GetFactor(APIView):
     """
     send an api to get factor and user object from arshia and makes factor and user objects
@@ -191,3 +197,4 @@ class GetFactor(APIView):
             "status":my_factor.status,
             "price":my_factor.price,
         })
+>>>>>>> 40f177b631cf3cf3577df1c3bd027f443986d03f
