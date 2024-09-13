@@ -12,6 +12,9 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import filters
 import json
+import environ
+env = environ.Env()
+environ.Env.read_env()
 
 
 class Login(TokenObtainPairView):
@@ -141,7 +144,7 @@ class GetOrder(APIView):
     send an api to get order and user object from arshia and makes factor and user objects
     """
     def post(self,request):
-        api_key = "aaa"
+        api_key = env("arshia_api")
         key = request.headers.get("key")
         user = request.data.get("username")
         order_id = request.data.get("order_id")
@@ -151,12 +154,18 @@ class GetOrder(APIView):
         if api_key != key:
             return Response("you are not allowed")     
         if pro:
-            discount_price = price * 0.2   
+            discount_price = price * 0.8   
         else:
             price += delivery_price
             discount_price = price
-        my_user = User.objects.create(username = user)
-        my_factor = Factor.objects.create(order_id = order_id , status = False , price = price , discount_price = discount_price ,user = my_user)
+        try:
+            my_user = User.objects.get(username = user)
+        except:
+            my_user = User.objects.create(username = user)
+        try:
+            my_factor = Factor.objects.create(order_id = order_id , status = False , price = price , discount_price = discount_price ,user = my_user)
+        except:
+            return Response("not valid order id")
         return Response({
             "date":my_factor.date,
             "status":my_factor.status,
@@ -169,7 +178,7 @@ class GetOrder(APIView):
 class GetFactor(APIView):
 
     def post(self,request):
-        api_key = "mqod"
+        api_key = env("mahan_api")
         key = request.headers.get("key")
         if key != api_key:
             return Response("invalid api key")
