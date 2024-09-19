@@ -194,6 +194,7 @@ class GetFactor(APIView):
     
         send = json.dumps({"name":user,"is_paid":True})
         requests.post(url , send)
+        return Response("Trueeeeeeeeee")
 
 
 
